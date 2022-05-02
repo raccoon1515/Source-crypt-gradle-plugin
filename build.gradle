@@ -1,0 +1,44 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '0.21.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '11'
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '11'
+}
+
+group = 'io.github.raccoon1515.sourcecrypt'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(gradleApi())
+    implementation(localGroovy())
+}
+
+pluginBundle {
+    website = 'https://github.com/raccoon1515/Source-crypt-gradle-plugin'
+    vcsUrl = 'https://github.com/raccoon1515/Source-crypt-gradle-plugin'
+    tags = ['crypt', 'source-code']
+}
+
+gradlePlugin {
+    plugins {
+        netRaccoonSourcecrypt {
+            id = 'io.github.raccoon1515.sourcecrypt'
+            displayName = 'Source crypt plugin'
+            description = 'The plugin that encrypts your source code'
+            implementationClass = 'net.raccoon.sourcecrypt.CryptPlugin'
+        }
+    }
+}
